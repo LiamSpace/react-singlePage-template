@@ -1,0 +1,19 @@
+@font-face{
+    font-family: 'myFontColor';
+    src: url('../../assets/fonts/Herculanum.ttf');
+}
+h1{
+    font-size: 26px;
+    color: orangered;
+}
+h4{
+    font-size: 20px;
+    color: orange;
+    font-family: 'myFontColor';
+}
+.fillImg{
+    width: 120px;
+    height: 120px;
+    border: 1px solid red;
+    background: url('../../assets/images/mac.jpeg');
+}
