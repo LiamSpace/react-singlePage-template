@@ -1,2 +1,2 @@
 # react-singlePage-template
-react + redux + react-router + es6  react-template
+react + redux + react-router + es6  react-project-template
