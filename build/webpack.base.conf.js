@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
     entry: {
@@ -17,40 +18,6 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 use: 'babel-loader',
                 include: path.resolve(__dirname, '../src/'),
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", 'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                require('autoprefixer')({
-                                    overrideBrowserslist: ['last 5 version']
-                                })
-                            ]
-                        }
-                    }
-                ],
-                include: [path.resolve(__dirname, "../src")],
-                exclude: /node_modules/
-            },
-            {
-                test: /\.s[ac]ss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader',
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            plugins: [
-                                require('autoprefixer')({
-                                    overrideBrowserslist: ['last 5 version']
-                                })
-                            ]
-                        }
-                    }
-                ],
-                include: [path.resolve(__dirname, "../src")],
                 exclude: /node_modules/
             },
             //处理图片

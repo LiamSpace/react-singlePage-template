@@ -5,10 +5,41 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const webpack = require('webpack');
 
-
-
 module.exports = merge(baseWebpackConf, {
     mode: 'development',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                loader: ['style-loader', 'css-loader', {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: [
+                            require('autoprefixer')({
+                                overrideBrowserslist: ['last 5 version']
+                            })
+                        ]
+                    }
+                }]
+            },
+            {
+                test: /\.s[ac]ss$/,
+                use:
+                    ['style-loader', 'css-loader', 'sass-loader',
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: [
+                                    require('autoprefixer')({
+                                        overrideBrowserslist: ['last 5 version']
+                                    })
+                                ]
+                            }
+                        }
+                    ]
+            }
+        ]
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
