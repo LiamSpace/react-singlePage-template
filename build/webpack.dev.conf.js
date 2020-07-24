@@ -41,6 +41,11 @@ module.exports = merge(baseWebpackConf, {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"development"'
+            }
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../public/index.html'),
@@ -68,7 +73,7 @@ module.exports = merge(baseWebpackConf, {
         open: true, //自动打开浏览器
         proxy: {
             "/api": {
-                target: 'http://127.0.0.1:3000',
+                target: 'http://www.liulongbin.top:3005',
                 pathRewrite: { "^api": "" }
             }
         }

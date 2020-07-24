@@ -54,6 +54,11 @@ module.exports = merge(baseWebpackConf, {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../public/index.html'),
             inject: "body",

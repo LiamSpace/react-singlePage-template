@@ -9,9 +9,10 @@
 > **支持功能**
 
  - *react*
- - react-dom
+ - *react-dom*
  - *redux*
- - *react-router*
+ - *react-router-dom*
+ - *prop-types 类型验证*
  - *sass*
  - *axios*
  - *静态资源目录*

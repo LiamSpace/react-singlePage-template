@@ -13,5 +13,8 @@
       }
     ],
     "react"
+  ],
+  "plugins": [
+    "dynamic-import-node"
   ]
 }

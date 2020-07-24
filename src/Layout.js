@@ -1,25 +1,55 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import imgUrl from "assets/images/img1.jpg"
-import videoUrl from 'assets/media/productAnimate.mp4'
-import '@/styles/index.scss'
+import { connect } from 'react-redux'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { router } from '@/router/index'
+import PropTypes from 'prop-types'
+import { Up, Down, asyncMethod } from '@/store/home/index'
+import '@/utils/http.js'
 
 
-export default class Layout extends React.Component {
+class Layout extends React.Component {
     constructor(props) {
         super(props)
     }
+    // static propTypes = {
+    //     dataInfo: PropTypes.object
+    // }
     render() {
         return (
-            <div>
-                <h1>hello world</h1>
-                <h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur aliquid incidunt pariatur dolores repellat nobis mollitia, maiores, eos recusandae eveniet sed illum cumque. Dolore sapiente excepturi nam fugit magnam dolores.</h4>
-                {/* <img src={require('./../assets/images/img1.jpg')} alt="" /> */}
-                <div className="fillImg"></div>
-                <img src={imgUrl} alt="" />
-                <img src={require('assets/images/img3.jpeg')} alt="" />
-                <video src={videoUrl} controls="controls"></video>
-            </div>
+            <BrowserRouter>
+                {router.map((item, index) => { return <Route key={index} path={item.path} exact={item.exact} component={item.component} /> })}
+                <div>
+                    <Link to="/">首页</Link>
+                    <Link to="/detail">详情</Link>
+                    <Link to="/table">表格</Link>
+                </div>
+                <button onClick={() => { this.props.asyncBtn() }}>
+                    点击这个按钮
+                </button>
+            </BrowserRouter>
         )
     }
 }
+const mapStateToProps = (state) => ({
+    number: state.counter.num,
+    arr: state.counter.dataArr
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        add: () => {
+            dispatch(Up())
+        },
+        remove: () => {
+            dispatch(Down())
+        },
+        asyncBtn: () => {
+            dispatch(asyncMethod())
+        }
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)
