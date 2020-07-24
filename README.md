@@ -30,4 +30,61 @@
 ----------
 
 > **目录结构**
+```
+.
+├── README.md
+├── assets
+│   ├── fonts
+│   │   └── Herculanum.ttf
+│   ├── images
+│   │   ├── img1.jpg
+│   │   ├── img3.jpeg
+│   │   └── mac.jpeg
+│   └── media
+│       └── productAnimate.mp4
+├── build
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js
+│   └── webpack.prod.conf.js
+├── dist
+│   ├── index.html
+│   ├── js
+│   │   ├── framework.b3fdeb59.js
+│   │   ├── main.b3fdeb59.js
+│   │   └── vendors~main.b3fdeb59.js
+│   └── static
+│       └── img2.jpeg
+├── package-lock.json
+├── package.json
+├── public
+│   └── index.html
+├── src
+│   ├── Layout.js
+│   ├── components
+│   ├── containers
+│   │   ├── detail.js
+│   │   ├── home.js
+│   │   └── table.js
+│   ├── main.js
+│   ├── network
+│   │   └── GetList.js
+│   ├── pages
+│   ├── router
+│   │   └── index.js
+│   ├── store
+│   │   ├── home
+│   │   │   └── index.js
+│   │   └── index.js
+│   ├── styles
+│   │   ├── common.scss
+│   │   ├── home
+│   │   ├── index.scss
+│   │   └── reset.scss
+│   └── utils
+│       ├── http.js
+│       └── loadable.js
+├── static
+    └── img2.jpeg
+
+```
 
