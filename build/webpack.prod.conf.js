@@ -5,6 +5,7 @@ const baseWebpackConf = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 module.exports = merge(baseWebpackConf, {
     mode: 'production',
     module: {
@@ -53,12 +54,20 @@ module.exports = merge(baseWebpackConf, {
             }
         ]
     },
+    optimization: {
+        minimizer: [new UglifyWebpackPlugin(
+            {
+                parallel: true
+            }
+        )]
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
             }
         }),
+        new UglifyWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../public/index.html'),
             inject: "body",
