@@ -1,12 +1,15 @@
 const { merge } = require('webpack-merge');
 const path = require('path');
+const webpack = require('webpack');
 const baseWebpackConf = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const webpack = require('webpack');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+
 
 module.exports = merge(baseWebpackConf, {
     mode: 'development',
+    devtool: 'cheap-module-eval-source-map',
     module: {
         rules: [
             {
@@ -53,18 +56,19 @@ module.exports = merge(baseWebpackConf, {
             minify: {
                 html5: true
             },
-            hash: false
+            hash: false,
         }),
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
                 messages: [`Your application is running here: http://localhost:8848`]
             }
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ],
     devServer: {
         host: 'localhost',
         port: '8848',
-        contentBase: path.join(__dirname, '../public'),
+        contentBase: path.join(__dirname, '../'),
         compress: true, //压缩
         historyApiFallback: true, //当路径匹配的文件不存在时,不出现404，而是应用该配置项
         hot: true, //热更新
@@ -73,7 +77,7 @@ module.exports = merge(baseWebpackConf, {
         open: true, //自动打开浏览器
         proxy: {
             "/api": {
-                target: 'http://www.liulongbin.top:3005',
+                target: 'http://www.baidu.com',
                 pathRewrite: { "^api": "" }
             }
         }

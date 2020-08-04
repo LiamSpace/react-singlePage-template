@@ -6,8 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 module.exports = merge(baseWebpackConf, {
     mode: 'production',
+    devtool: 'cheap-module-source-map',
     module: {
         rules: [
             {
@@ -59,7 +61,19 @@ module.exports = merge(baseWebpackConf, {
             {
                 parallel: true
             }
-        )]
+        )],
+        // 分割代码 拆分包
+        splitChunks: {
+            chunks: "all",
+            cacheGroups: {
+                libs: {
+                    name: "chunks-libs",
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: 10,
+                    chunks: "initial" //打包初始时依赖的第三方
+                }
+            }
+        }
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -83,6 +97,7 @@ module.exports = merge(baseWebpackConf, {
             chunkFilename: '[id].css',
             ignoreOrder: false, // Enable to remove warnings about conflicting order),
         }),
+        new CompressionWebpackPlugin(),
         new CleanWebpackPlugin()
     ],
 

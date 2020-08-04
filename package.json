@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --colors --config build/webpack.dev.conf.js",
     "build": "webpack --config build/webpack.prod.conf.js",
+    "dll": "rimraf ./library && webpack --config build/webpack.dll.conf.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "liam",
@@ -32,6 +33,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
@@ -45,6 +47,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.0.9"

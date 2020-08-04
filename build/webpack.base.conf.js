@@ -1,17 +1,18 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
         main: path.resolve(__dirname, "../src/main.js"),
-        framework: ['react', 'react-dom'] //分离业务代码和公共代码
+        // framework: ['react', 'react-dom'] //分离业务代码和公共代码
     },
     output: {
         filename: 'js/[name].[hash:8].js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve(__dirname, '../dist'),
+        chunkFilename: 'js/[name].[hash:8].js'
     },
-    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -91,6 +92,14 @@ module.exports = {
             from: path.resolve(__dirname, "../static"),
             to: path.resolve(__dirname, "../dist/static")
         }]),
+        //定义全局变量
+        new webpack.DefinePlugin({
+            // 'React': 'react'
+        }),
+        new webpack.DllReferencePlugin({
+            manifest: require(path.resolve(__dirname, '../library', 'manifest.json')),
+            context: path.resolve(__dirname, './')
+        })
     ],
     resolve: {
         alias: {
@@ -102,18 +111,18 @@ module.exports = {
         },
         extensions: ['.js', '.jsx']
     },
-    optimization: {
-        splitChunks: {
-            chunks: 'all',
-            minChunks: 1,
-            minSize: 0,
-            cacheGroups: {
-                framework: {
-                    test: 'framework', //可为字符串，正则表达式，函数等形式，匹配入口文件当中需要提出来的公共库，并且从入口文件当中抽离。
-                    name: 'framework',
-                    enforce: true
-                }
-            }
-        }
-    }
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'all',
+    //         minChunks: 1,
+    //         minSize: 0,
+    //         cacheGroups: {
+    //             framework: {
+    //                 test: 'framework', //可为字符串，正则表达式，函数等形式，匹配入口文件当中需要提出来的公共库，并且从入口文件当中抽离。
+    //                 name: 'framework',
+    //                 enforce: true
+    //             }
+    //         }
+    //     }
+    // }
 }
