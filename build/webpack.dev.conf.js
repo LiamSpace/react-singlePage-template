@@ -3,8 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const baseWebpackConf = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
 
 
 module.exports = merge(baseWebpackConf, {
@@ -63,7 +63,7 @@ module.exports = merge(baseWebpackConf, {
                 messages: [`Your application is running here: http://localhost:8848`]
             }
         }),
-        new BundleAnalyzerPlugin()
+
     ],
     devServer: {
         host: 'localhost',
@@ -80,6 +80,6 @@ module.exports = merge(baseWebpackConf, {
                 target: 'http://www.baidu.com',
                 pathRewrite: { "^api": "" }
             }
-        }
-    }
+        },
+    },
 })
